@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+.env
+data/raw/*.pkl
+data/processed/*.pkl
+models/checkpoints/
