@@ -1,0 +1,49 @@
+data:
+  drive_path: "/content/drive/MyDrive/wafer-hackathon"
+  processed_data: "data/processed/processed_dataset.pkl"
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+
+model:
+  architecture: "vit_only"
+  backbone: "vit_small_patch16_224"
+  pretrained: true
+  num_classes: 9
+  dropout: 0.3
+
+training:
+  batch_size: 32
+  epochs: 30
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  optimizer: "adamw"
+  scheduler: "cosine"
+  use_class_weights: true # imbalance handling
+  label_smoothing: 0.1
+  use_amp: true # mixed precision speed
+
+checkpoint:
+  checkpoint_every: 5 # critical for Colab
+  checkpoint_path: "models/checkpoints/"
+  resume_from_checkpoint: null
+
+early_stopping:
+  patience: 10
+  monitor_metric: "val_accuracy"
+
+metrics:
+  - top1_accuracy
+  - top3_accuracy
+  - precision
+  - recall
+  - f1_score
+
+calibration:
+  enabled: true
+  bins: 10
+
+logging:
+  use_wandb: false
+  print_every: 50
+  save_plots: true
