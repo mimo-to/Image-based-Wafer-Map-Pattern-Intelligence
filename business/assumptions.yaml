@@ -1,0 +1,33 @@
+factory:
+  wafers_per_day: null
+  operating_days_per_month: 22
+  shifts_per_day: 3
+
+manual_inspection:
+  time_per_wafer_minutes: null
+  inspector_hourly_wage_inr: null
+  false_negative_rate: null
+  false_positive_rate: null
+
+ai_performance:
+  accuracy: null
+  false_negative_rate: null
+  false_positive_rate: null
+  average_inference_time_ms: null
+
+costs:
+  wafer_cost_inr: null
+  defective_wafer_downstream_cost_multiplier: null
+  system_development_cost_inr: null
+  monthly_compute_cost_inr: null
+
+formulas:
+  labor_cost_savings_formula: "inspectors_freed × manual_inspection.inspector_hourly_wage_inr × hours_per_month"
+  quality_improvement_formula: "(manual_inspection.false_negative_rate - ai_performance.false_negative_rate) × factory.wafers_per_day × costs.defective_wafer_downstream_cost_multiplier"
+  scrap_reduction_formula: "(manual_inspection.false_positive_rate - ai_performance.false_positive_rate) × factory.wafers_per_day × costs.wafer_cost_inr"
+
+display:
+  show_assumptions: true
+  allow_user_edit: true
+  show_formulas: true
+  confidence_interval: true

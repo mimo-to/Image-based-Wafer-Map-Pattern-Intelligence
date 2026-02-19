@@ -1,0 +1,28 @@
+model:
+  architecture: "vit_only"
+  backbone: "vit_small_patch16_224"
+  num_classes: 9
+  pretrained: false
+  dropout: 0.0
+
+inference:
+  device: "cuda"
+  batch_size: 1
+  mixed_precision: false
+  max_timeout_ms: 100
+  format: "onnx"
+  precision: "fp32"
+
+demo:
+  prerendered_mode: true  # CRITICAL
+  cache_path: "data/demo_cache/"
+  fallback_enabled: true
+  cached_samples: 50
+
+uncertainty:
+  enabled: true
+  method: "softmax_entropy"
+
+visualization:
+  generate_gradcam: true
+  save_heatmaps: false
